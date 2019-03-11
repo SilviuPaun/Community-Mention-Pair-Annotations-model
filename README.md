@@ -1,1 +1,1 @@
-# Community-Mention-Pair-Annotations-model
+# Community Mention Pair Annotations (CommunityMPA) model
