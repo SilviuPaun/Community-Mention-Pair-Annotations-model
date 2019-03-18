@@ -1,10 +1,10 @@
 ## Community Mention Pair Annotations (CommunityMPA) model
 
-This is a variational inference implementation of the *Community Mention Pair Annotations* (CommunityMPA) model presented in
+This is a variational inference implementation of the *Community Mention Pair Annotations* (CommunityMPA) model presented in:
 
 Silviu Paun, Juntao Yu, Massimo Poesio (2019). **A Mention-Pair Model of Annotation with Nonparametric User Communities**. *To appear*. 
 
-The model is a partially pooled extension of the MPA model from:
+The model is a partially pooled nonparametric extension of the MPA model from:
 
 Silviu Paun, Jon Chamberlain, Udo Kruschwitz, Juntao Yu, Massimo Poesio (2018). **A Probabilistic Annotation Model for Crowdsourcing Coreference**. In *Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing (EMNLP)*.
 
