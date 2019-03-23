@@ -1087,7 +1087,7 @@ public class Model {
 				if(lineCounter%10000 == 0)
 					System.out.println("processed lines: " + lineCounter);
 				
-				String[] data = fileLine.split(",");  //change to "," for pd; "\t" for snow
+				String[] data = fileLine.split(","); 
 				
 				String documentName = "same";
 				String item = data[0];
@@ -1095,52 +1095,40 @@ public class Model {
 				String responseClass = data[3];
 				String gold = data[2];
 				
-				//Snow et al. (2008)
-//				String documentName = "same_doc";
-//				String item = data[2];
-//				String annotator = data[1];
-//				data[3] = Integer.parseInt(data[3]) >= 0  ? "pos" : "neg" ;
-//				data[4] = Integer.parseInt(data[4]) >= 0  ? "pos" : "neg" ;
-//				String responseClass = data[3] + "(" + data[3] + ")";
-//				String gold = data[4] + "(" + data[4] + ")";
+				if(!annotators.contains(annotator))
+					annotators.add(annotator);
+						
+				if(!items.contains(item))
+					items.add(item);
+						
+				List<String> iClasses = itemInterpretations.containsKey(item) ? itemInterpretations.get(item) : new ArrayList<String>();
+				if(!iClasses.contains(responseClass))
+					iClasses.add(responseClass);
+				itemInterpretations.put(item, iClasses);
+					
+				int annotatorIndex = annotators.indexOf(annotator);
+				int itemIndex = items.indexOf(item);
+				int responseIndex = iClasses.indexOf(responseClass);
+					
+				List<Integer> itemAnt = itemAnnotations.containsKey(itemIndex) ? itemAnnotations.get(itemIndex) : new ArrayList<Integer>();
+				itemAnt.add(responseIndex);
+				itemAnnotations.put(itemIndex, itemAnt);
+						
+				annotatorOfItemAnnotation.put(new Pair(itemIndex, itemAnt.size() - 1), annotatorIndex);
+				if(!gold.equals("none"))
+					itemGoldStandard.put(item, gold);
+					
+				itemDocument.put(item, documentName);
 				
-				
-//				if(!CheckGold(documentName))
-				{
-					if(!annotators.contains(annotator))
-						annotators.add(annotator);
-						
-					if(!items.contains(item))
-						items.add(item);
-						
-					List<String> iClasses = itemInterpretations.containsKey(item) ? itemInterpretations.get(item) : new ArrayList<String>();
-					if(!iClasses.contains(responseClass))
-						iClasses.add(responseClass);
-					itemInterpretations.put(item, iClasses);
-					
-					int annotatorIndex = annotators.indexOf(annotator);
-					int itemIndex = items.indexOf(item);
-					int responseIndex = iClasses.indexOf(responseClass);
-					
-					List<Integer> itemAnt = itemAnnotations.containsKey(itemIndex) ? itemAnnotations.get(itemIndex) : new ArrayList<Integer>();
-					itemAnt.add(responseIndex);
-					itemAnnotations.put(itemIndex, itemAnt);
-						
-					annotatorOfItemAnnotation.put(new Pair(itemIndex, itemAnt.size() - 1), annotatorIndex);
-					if(!gold.equals("none"))
-						itemGoldStandard.put(item, gold);
-					
-					itemDocument.put(item, documentName);
-				}
+				fileLine = reader.readLine();
+			}
 			
-			fileLine = reader.readLine();
-		}
-		reader.close();
-		
-		I = items.size();
-		J = annotators.size();
-		
-		TransformAnnotationsIntoBinaryDecisions();
+			reader.close();
+			
+			I = items.size();
+			J = annotators.size();
+			
+			TransformAnnotationsIntoBinaryDecisions();
 		
 		} catch (IOException e) {
 			e.printStackTrace();
