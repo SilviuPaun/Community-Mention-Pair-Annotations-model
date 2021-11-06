@@ -2,7 +2,7 @@
 
 This is a variational inference implementation of the *Community Mention Pair Annotations* (CommunityMPA) model presented in:
 
-Silviu Paun, Juntao Yu, Jon Chamberlain, Udo Kruschwitz, Massimo Poesio (2019). **A Mention-Pair Model of Annotation with Nonparametric User Communities**. *Under review*. 
+Silviu Paun, Juntao Yu, Jon Chamberlain, Udo Kruschwitz, Massimo Poesio (2019). **A Mention-Pair Model of Annotation with Nonparametric User Communities**.
 
 The model is a partially pooled nonparametric extension of the MPA model from:
 
